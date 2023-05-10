@@ -17,6 +17,12 @@ type Auth struct {
 	ExternalId          string
 }
 
+const (
+	LAMBDA_CLIENT  = "lambda"
+	COST_EXPLORER  = "costExplorer"
+	CLOUDWATCH_LOG = "cloudWatchLog"
+)
+
 // GetClient is returns aws clients
 func GetClient(auth Auth, clientType string) interface{} {
 

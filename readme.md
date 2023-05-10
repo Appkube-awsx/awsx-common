@@ -21,10 +21,14 @@ These function accepts 'auth' struct that is following
 ```
 
 ### List of client types
-1. lambda
-2. costExplorer
-3. cloudWatchLog
 
+```go 
+    const (
+        LAMBDA_CLIENT  = "lambda"
+        COST_EXPLORER  = "costExplorer"
+        CLOUDWATCH_LOG = "cloudWatchLog"
+    )
+```
 ### Project structure
 ```
 client
