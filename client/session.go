@@ -2,7 +2,7 @@ package client
 
 import (
 	"fmt"
-	"github.com/Appkube-awsx/awsx-lambda/awssession"
+	"github.com/Appkube-awsx/awsx-common/awssession"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/sts"
