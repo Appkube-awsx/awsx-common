@@ -4,11 +4,9 @@ This package is created for getting different type of aws service clients for sy
 
 ## List of function that are created in this package
 
-| S.No. | Functions                | Accepted arguments | Return type (from aws)         |
-|-------|--------------------------|--------------------|--------------------------------|
-| 1.    | GetLambdaClient()        | (auth Auth)        | *lambda.Lambda                 |
-| 2.    | GetCostClient()          | (auth Auth)        | *costexplorer.CostExplorer     |
-| 3.    | GetCloudWatchLogClient() | (auth Auth)        | *cloudwatchlogs.CloudWatchLogs |
+| S.No. | Functions            | Accepted arguments              | Return type (from aws) |
+|-------|----------------------|---------------------------------|------------------------|
+| 1.    | GetClient()          | (auth Auth, clientType string)  | interface{}            |
 
 These function accepts 'auth' struct that is following
 
@@ -21,6 +19,11 @@ These function accepts 'auth' struct that is following
         ExternalId          string
     }
 ```
+
+### List of client types
+1. lambda
+2. costExplorer
+3. cloudWatchLog
 
 ### Project structure
 ```

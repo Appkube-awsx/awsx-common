@@ -17,41 +17,22 @@ type Auth struct {
 	ExternalId          string
 }
 
-// GetLambdaClient is returns aws lambda client
-func GetLambdaClient(auth Auth) *lambda.Lambda {
+// GetClient is returns aws clients
+func GetClient(auth Auth, clientType string) interface{} {
 
 	// Get session
 	awsSession := GetSessionWithAssumeRole(auth.CrossAccountRoleArn, sessionName, auth.ExternalId, auth.AccessKey, auth.SecretKey, auth.Region)
 
-	// Get client
-	lambdaClient := lambda.New(awsSession)
+	switch clientType {
 
-	// return client
-	return lambdaClient
-}
+	case "lambda":
+		return lambda.New(awsSession)
+	case "costExplorer":
+		return costexplorer.New(awsSession)
+	case "cloudWatchLog":
+		return cloudwatchlogs.New(awsSession)
 
-// GetCostClient is returns aws costexplorer client
-func GetCostClient(auth Auth) *costexplorer.CostExplorer {
+	}
 
-	// Get session
-	awsSession := GetSessionWithAssumeRole(auth.CrossAccountRoleArn, sessionName, auth.ExternalId, auth.AccessKey, auth.SecretKey, auth.Region)
-
-	// Get client
-	costexplorer := costexplorer.New(awsSession)
-
-	// return client
-	return costexplorer
-}
-
-// GetCloudWatchLogClient is returns aws cloudwatchlogs client
-func GetCloudWatchLogClient(auth Auth) *cloudwatchlogs.CloudWatchLogs {
-
-	// Get session
-	awsSession := GetSessionWithAssumeRole(auth.CrossAccountRoleArn, sessionName, auth.ExternalId, auth.AccessKey, auth.SecretKey, auth.Region)
-
-	// Get client
-	cloudwatchlogs := cloudwatchlogs.New(awsSession)
-
-	// return client
-	return cloudwatchlogs
+	return nil
 }
