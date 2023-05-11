@@ -2,7 +2,7 @@ package client
 
 import (
 	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/aws/aws-sdk-go/service/cloudwatch"
+	"github.com/aws/aws-sdk-go/service/cloudwatchlogs"
 	"github.com/aws/aws-sdk-go/service/costexplorer"
 	"github.com/aws/aws-sdk-go/service/lambda"
 )
@@ -25,7 +25,7 @@ const (
 var clients = map[string]func(*session.Session) interface{}{
 	LAMBDA_CLIENT:  func(session *session.Session) interface{} { return lambda.New(session) },
 	COST_EXPLORER:  func(session *session.Session) interface{} { return costexplorer.New(session) },
-	CLOUDWATCH_LOG: func(session *session.Session) interface{} { return cloudwatch.New(session) },
+	CLOUDWATCH_LOG: func(session *session.Session) interface{} { return cloudwatchlogs.New(session) },
 }
 
 // GetClient is returns aws clients
