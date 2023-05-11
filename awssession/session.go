@@ -8,12 +8,12 @@ import (
 
 var sess *session.Session
 
-func GetSessionByRegion(region string) *session.Session {
-	sess = session.Must(session.NewSession(&aws.Config{
-		Region: aws.String(region),
-	}))
-	return sess
-}
+//func GetSessionByRegion(region string) *session.Session {
+//	sess = session.Must(session.NewSession(&aws.Config{
+//		Region: aws.String(region),
+//	}))
+//	return sess
+//}
 
 func GetSessionByCreds(region string, accessKey string, secretKey string, token string) (*session.Session, error) {
 	sess, err := session.NewSession(&aws.Config{

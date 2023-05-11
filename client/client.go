@@ -1,8 +1,7 @@
 package client
 
 import (
-	"github.com/aws/aws-sdk-go/service/cloudwatchlogs"
-	"github.com/aws/aws-sdk-go/service/costexplorer"
+	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/lambda"
 )
 
@@ -23,22 +22,16 @@ const (
 	CLOUDWATCH_LOG = "cloudWatchLog"
 )
 
+var clients = map[string]func(*session.Session) interface{}{
+	LAMBDA_CLIENT:  func(session *session.Session) interface{} { return lambda.New(session) },
+	COST_EXPLORER:  func(session *session.Session) interface{} { return lambda.New(session) },
+	CLOUDWATCH_LOG: func(session *session.Session) interface{} { return lambda.New(session) },
+}
+
 // GetClient is returns aws clients
 func GetClient(auth Auth, clientType string) interface{} {
 
 	// Get session
 	awsSession := GetSessionWithAssumeRole(auth.CrossAccountRoleArn, sessionName, auth.ExternalId, auth.AccessKey, auth.SecretKey, auth.Region)
-
-	switch clientType {
-
-	case "lambda":
-		return lambda.New(awsSession)
-	case "costExplorer":
-		return costexplorer.New(awsSession)
-	case "cloudWatchLog":
-		return cloudwatchlogs.New(awsSession)
-
-	}
-
-	return nil
+	return clients[clientType](awsSession)
 }
