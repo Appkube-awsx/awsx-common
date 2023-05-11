@@ -29,6 +29,22 @@ These function accepts 'auth' struct that is following
         CLOUDWATCH_LOG = "cloudWatchLog"
     )
 ```
+
+## Example of using function
+
+`example for lambda`
+```go
+    auth := client.Auth{
+        "us-east-1",
+        os.Getenv("AWS_CROSS_ARN"),
+        os.Getenv("AWS_ACCKEY"),
+        os.Getenv("AWS_SECKEY"),
+        os.Getenv("AWS_EXTERNALID"),
+    }
+
+    lambdaClient := client.GetClient(auth, client.LAMBDA_CLIENT).(*lambda.Lambda)
+```
+
 ### Project structure
 ```
 client
