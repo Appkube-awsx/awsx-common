@@ -11,11 +11,11 @@ import (
 func main() {
 
 	auth := client.Auth{
-		"us-east-1",
-		os.Getenv("AWS_CROSS_ARN"),
-		os.Getenv("AWS_ACCKEY"),
-		os.Getenv("AWS_SECKEY"),
-		os.Getenv("AWS_EXTERNALID"),
+		Region:              "us-east-1",
+		CrossAccountRoleArn: os.Getenv("AWS_CROSS_ARN"),
+		AccessKey:           os.Getenv("AWS_ACCKEY"),
+		SecretKey:           os.Getenv("AWS_SECKEY"),
+		ExternalId:          os.Getenv("AWS_EXTERNALID"),
 	}
 
 	data := client.GetClient(auth, client.LAMBDA_CLIENT)

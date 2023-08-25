@@ -11,14 +11,14 @@ import (
 
 // Auth struct to store authentication data
 type Auth struct {
-	VaultUrl            string
-	VaultToken          string
-	VaultKey            string
-	Region              string
-	CrossAccountRoleArn string
-	AccessKey           string
-	SecretKey           string
-	ExternalId          string
+	VaultUrl            string `json:"vaultUrl,omitempty"`
+	VaultToken          string `json:"vaultToken,omitempty"`
+	VaultKey            string `json:"vaultKey,omitempty"`
+	Region              string `json:"region,omitempty"`
+	CrossAccountRoleArn string `json:"crossAccountRoleArn,omitempty"`
+	AccessKey           string `json:"accessKey,omitempty"`
+	SecretKey           string `json:"secretKey,omitempty"`
+	ExternalId          string `json:"externalId,omitempty"`
 }
 
 const (
