@@ -12,6 +12,9 @@ These function accepts 'auth' struct that is following
 
 ```go
     type Auth struct {
+        VaultUrl            string
+        VaultToken          string
+        VaultKey            string
         Region              string
         CrossAccountRoleArn string
         AccessKey           string

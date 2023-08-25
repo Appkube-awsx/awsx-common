@@ -11,6 +11,9 @@ import (
 
 // Auth struct to store authentication data
 type Auth struct {
+	VaultUrl            string
+	VaultToken          string
+	VaultKey            string
 	Region              string
 	CrossAccountRoleArn string
 	AccessKey           string
@@ -23,7 +26,7 @@ const (
 	COST_EXPLORER  = "costExplorer"
 	CLOUDWATCH_LOG = "cloudWatchLog"
 	KMS_CLIENT     = "kms"
-	ELBV2_CLIENT = "elbv2"
+	ELBV2_CLIENT   = "elbv2"
 )
 
 var clients = map[string]func(*session.Session) interface{}{
@@ -31,7 +34,7 @@ var clients = map[string]func(*session.Session) interface{}{
 	COST_EXPLORER:  func(session *session.Session) interface{} { return costexplorer.New(session) },
 	CLOUDWATCH_LOG: func(session *session.Session) interface{} { return cloudwatchlogs.New(session) },
 	KMS_CLIENT:     func(session *session.Session) interface{} { return kms.New(session) },
-	ELBV2_CLIENT:     func(session *session.Session) interface{} { return elbv2.New(session) },
+	ELBV2_CLIENT:   func(session *session.Session) interface{} { return elbv2.New(session) },
 }
 
 // GetClient is returns aws clients
