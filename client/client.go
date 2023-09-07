@@ -3,6 +3,7 @@ package client
 import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/cloudwatchlogs"
+	"github.com/aws/aws-sdk-go/service/configservice"
 	"github.com/aws/aws-sdk-go/service/costexplorer"
 	"github.com/aws/aws-sdk-go/service/elbv2"
 	"github.com/aws/aws-sdk-go/service/kms"
@@ -22,19 +23,21 @@ type Auth struct {
 }
 
 const (
-	LAMBDA_CLIENT  = "lambda"
-	COST_EXPLORER  = "costExplorer"
-	CLOUDWATCH_LOG = "cloudWatchLog"
-	KMS_CLIENT     = "kms"
-	ELBV2_CLIENT   = "elbv2"
+	LAMBDA_CLIENT         = "lambda"
+	COST_EXPLORER         = "costExplorer"
+	CLOUDWATCH_LOG        = "cloudWatchLog"
+	KMS_CLIENT            = "kms"
+	ELBV2_CLIENT          = "elbv2"
+	CONFIG_SERVICE_CLIENT = "configservice"
 )
 
 var clients = map[string]func(*session.Session) interface{}{
-	LAMBDA_CLIENT:  func(session *session.Session) interface{} { return lambda.New(session) },
-	COST_EXPLORER:  func(session *session.Session) interface{} { return costexplorer.New(session) },
-	CLOUDWATCH_LOG: func(session *session.Session) interface{} { return cloudwatchlogs.New(session) },
-	KMS_CLIENT:     func(session *session.Session) interface{} { return kms.New(session) },
-	ELBV2_CLIENT:   func(session *session.Session) interface{} { return elbv2.New(session) },
+	LAMBDA_CLIENT:         func(session *session.Session) interface{} { return lambda.New(session) },
+	COST_EXPLORER:         func(session *session.Session) interface{} { return costexplorer.New(session) },
+	CLOUDWATCH_LOG:        func(session *session.Session) interface{} { return cloudwatchlogs.New(session) },
+	KMS_CLIENT:            func(session *session.Session) interface{} { return kms.New(session) },
+	ELBV2_CLIENT:          func(session *session.Session) interface{} { return elbv2.New(session) },
+	CONFIG_SERVICE_CLIENT: func(session *session.Session) interface{} { return configservice.New(session) },
 }
 
 // GetClient is returns aws clients
