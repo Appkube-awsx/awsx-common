@@ -82,8 +82,21 @@ func CommandAuth(cmd *cobra.Command) (bool, *client.Auth, error) {
 	region, _ := cmd.PersistentFlags().GetString("zone")
 	acKey, _ := cmd.PersistentFlags().GetString("accessKey")
 	secKey, _ := cmd.PersistentFlags().GetString("secretKey")
-	crossAccountRoleArn, _ := cmd.Flags().GetString("crossAccountRoleArn")
+	crossAccountRoleArn, _ := cmd.PersistentFlags().GetString("crossAccountRoleArn")
 	externalId, _ := cmd.PersistentFlags().GetString("externalId")
+	authFlag, clientAuth, err := AuthenticateData(vaultUrl, vaultToken, accountNo, region, acKey, secKey, crossAccountRoleArn, externalId)
+	return authFlag, clientAuth, err
+}
+
+func SubCommandAuth(cmd *cobra.Command) (bool, *client.Auth, error) {
+	vaultUrl, _ := cmd.Parent().PersistentFlags().GetString("vaultUrl")
+	vaultToken, _ := cmd.Parent().PersistentFlags().GetString("vaultToken")
+	accountNo, _ := cmd.Parent().PersistentFlags().GetString("accountId")
+	region, _ := cmd.Parent().PersistentFlags().GetString("zone")
+	acKey, _ := cmd.Parent().PersistentFlags().GetString("accessKey")
+	secKey, _ := cmd.Parent().PersistentFlags().GetString("secretKey")
+	crossAccountRoleArn, _ := cmd.Parent().PersistentFlags().GetString("crossAccountRoleArn")
+	externalId, _ := cmd.Parent().PersistentFlags().GetString("externalId")
 	authFlag, clientAuth, err := AuthenticateData(vaultUrl, vaultToken, accountNo, region, acKey, secKey, crossAccountRoleArn, externalId)
 	return authFlag, clientAuth, err
 }
