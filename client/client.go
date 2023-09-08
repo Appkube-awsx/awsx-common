@@ -5,6 +5,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/cloudwatchlogs"
 	"github.com/aws/aws-sdk-go/service/configservice"
 	"github.com/aws/aws-sdk-go/service/costexplorer"
+	"github.com/aws/aws-sdk-go/service/eks"
 	"github.com/aws/aws-sdk-go/service/elbv2"
 	"github.com/aws/aws-sdk-go/service/kms"
 	"github.com/aws/aws-sdk-go/service/lambda"
@@ -29,6 +30,7 @@ const (
 	KMS_CLIENT            = "kms"
 	ELBV2_CLIENT          = "elbv2"
 	CONFIG_SERVICE_CLIENT = "configservice"
+	EKS_CLIENT            = "eks"
 )
 
 var clients = map[string]func(*session.Session) interface{}{
@@ -38,6 +40,7 @@ var clients = map[string]func(*session.Session) interface{}{
 	KMS_CLIENT:            func(session *session.Session) interface{} { return kms.New(session) },
 	ELBV2_CLIENT:          func(session *session.Session) interface{} { return elbv2.New(session) },
 	CONFIG_SERVICE_CLIENT: func(session *session.Session) interface{} { return configservice.New(session) },
+	EKS_CLIENT:            func(session *session.Session) interface{} { return eks.New(session) },
 }
 
 // GetClient is returns aws clients
