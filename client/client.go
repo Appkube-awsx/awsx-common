@@ -6,6 +6,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/cloudwatchlogs"
 	"github.com/aws/aws-sdk-go/service/configservice"
 	"github.com/aws/aws-sdk-go/service/costexplorer"
+	"github.com/aws/aws-sdk-go/service/ec2"
 	"github.com/aws/aws-sdk-go/service/eks"
 	"github.com/aws/aws-sdk-go/service/elbv2"
 	"github.com/aws/aws-sdk-go/service/kms"
@@ -37,6 +38,7 @@ const (
 	RDS_CLIENT            = "rds"
 	CLOUD_FRONT_CLIENT    = "cloudfront"
 	WAF_CLIENT            = "waf"
+	EC2_CLIENT            = "ec2"
 )
 
 var clients = map[string]func(*session.Session) interface{}{
@@ -50,6 +52,7 @@ var clients = map[string]func(*session.Session) interface{}{
 	RDS_CLIENT:            func(session *session.Session) interface{} { return rds.New(session) },
 	CLOUD_FRONT_CLIENT:    func(session *session.Session) interface{} { return cloudfront.New(session) },
 	WAF_CLIENT:            func(session *session.Session) interface{} { return waf.New(session) },
+	EC2_CLIENT:            func(session *session.Session) interface{} { return ec2.New(session) },
 }
 
 // GetClient is returns aws clients
