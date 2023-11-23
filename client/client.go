@@ -6,6 +6,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/appmesh"
 	"github.com/aws/aws-sdk-go/service/athena"
 	"github.com/aws/aws-sdk-go/service/cloudfront"
+	"github.com/aws/aws-sdk-go/service/cloudwatch"
 	"github.com/aws/aws-sdk-go/service/cloudwatchlogs"
 	"github.com/aws/aws-sdk-go/service/configservice"
 	"github.com/aws/aws-sdk-go/service/costexplorer"
@@ -44,6 +45,7 @@ const (
 	LAMBDA_CLIENT               = "lambda"
 	COST_EXPLORER               = "costExplorer"
 	CLOUDWATCH_LOG              = "cloudWatchLog"
+	CLOUDWATCH                  = "cloudwatch"
 	KMS_CLIENT                  = "kms"
 	ELBV2_CLIENT                = "elbv2"
 	CONFIG_SERVICE_CLIENT       = "configservice"
@@ -71,6 +73,7 @@ var clients = map[string]func(*session.Session) interface{}{
 	LAMBDA_CLIENT:               func(session *session.Session) interface{} { return lambda.New(session) },
 	COST_EXPLORER:               func(session *session.Session) interface{} { return costexplorer.New(session) },
 	CLOUDWATCH_LOG:              func(session *session.Session) interface{} { return cloudwatchlogs.New(session) },
+	CLOUDWATCH:                  func(session *session.Session) interface{} { return cloudwatch.New(session) },
 	KMS_CLIENT:                  func(session *session.Session) interface{} { return kms.New(session) },
 	ELBV2_CLIENT:                func(session *session.Session) interface{} { return elbv2.New(session) },
 	CONFIG_SERVICE_CLIENT:       func(session *session.Session) interface{} { return configservice.New(session) },
