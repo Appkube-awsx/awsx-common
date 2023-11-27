@@ -29,7 +29,7 @@ type VaultResponse struct {
 type ApiResponse struct {
 	Status     string        `json:"status,omitempty"`
 	Message    string        `json:"message,omitempty"`
-	StatusCode string        `json:"statusCode,omitempty"`
+	StatusCode int64         `json:"statusCode,omitempty"`
 	Data       AwsCredential `json:"data,omitempty"`
 }
 
