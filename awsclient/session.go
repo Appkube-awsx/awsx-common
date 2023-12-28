@@ -1,8 +1,9 @@
-package client
+package awsclient
 
 import (
 	"fmt"
 	"github.com/Appkube-awsx/awsx-common/awssession"
+	"github.com/Appkube-awsx/awsx-common/model"
 	util "github.com/Appkube-awsx/awsx-common/utils"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -12,7 +13,7 @@ import (
 
 var sessionName = util.RandomString(10)
 
-func GetSessionWithAssumeRole(auth Auth) *session.Session {
+func GetSessionWithAssumeRole(auth model.Auth) *session.Session {
 	sess, err := awssession.GetSessionByCreds(auth.Region, auth.AccessKey, auth.SecretKey, "")
 
 	if err != nil {

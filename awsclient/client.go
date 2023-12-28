@@ -1,6 +1,7 @@
-package client
+package awsclient
 
 import (
+	"github.com/Appkube-awsx/awsx-common/model"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/apigateway"
 	"github.com/aws/aws-sdk-go/service/appmesh"
@@ -28,18 +29,6 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/waf"
 )
-
-// Auth struct to store authentication data
-type Auth struct {
-	VaultUrl            string `json:"vaultUrl,omitempty"`
-	VaultToken          string `json:"vaultToken,omitempty"`
-	VaultKey            string `json:"vaultKey,omitempty"`
-	Region              string `json:"region,omitempty"`
-	CrossAccountRoleArn string `json:"crossAccountRoleArn,omitempty"`
-	AccessKey           string `json:"accessKey,omitempty"`
-	SecretKey           string `json:"secretKey,omitempty"`
-	ExternalId          string `json:"externalId,omitempty"`
-}
 
 const (
 	LAMBDA_CLIENT               = "lambda"
@@ -98,7 +87,7 @@ var clients = map[string]func(*session.Session) interface{}{
 }
 
 // GetClient is returns aws clients
-func GetClient(auth Auth, clientType string) interface{} {
+func GetClient(auth model.Auth, clientType string) interface{} {
 
 	// Get session
 	awsSession := GetSessionWithAssumeRole(auth)
