@@ -13,11 +13,10 @@ import (
 )
 
 func GetGlobalAwsCreds(commandParam model.CommandParam) (*model.GlobalAwsSecrets, error) {
-	resp, err := getGlobalAwsCredsFromVault(commandParam)
+	resp, err := getGlobalAwsCredsFromCommandLine(commandParam)
 	if err == nil {
 		return resp, err
 	}
-	resp, err = getGlobalAwsCredsFromEnvironmentVariable(commandParam)
 	if err == nil {
 		return resp, err
 	}
@@ -25,10 +24,11 @@ func GetGlobalAwsCreds(commandParam model.CommandParam) (*model.GlobalAwsSecrets
 	if err == nil {
 		return resp, err
 	}
-	resp, err = getGlobalAwsCredsFromCommandLine(commandParam)
+	resp, err = getGlobalAwsCredsFromVault(commandParam)
 	if err == nil {
 		return resp, err
 	}
+	resp, err = getGlobalAwsCredsFromEnvironmentVariable(commandParam)
 	return nil, err
 }
 
