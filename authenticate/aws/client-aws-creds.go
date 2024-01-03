@@ -11,11 +11,7 @@ import (
 )
 
 func GetClientAwsCreds(commandParam model.CommandParam) (*model.ClientAwsSecrets, error) {
-	resp, err := getClientAwsCredsFromVault(commandParam)
-	if err == nil {
-		return resp, err
-	}
-	resp, err = getClientAwsCredsFromEnvironmentVariable()
+	resp, err := getClientAwsCredsFromCommandLine(commandParam)
 	if err == nil {
 		return resp, err
 	}
@@ -23,7 +19,11 @@ func GetClientAwsCreds(commandParam model.CommandParam) (*model.ClientAwsSecrets
 	if err == nil {
 		return resp, err
 	}
-	resp, err = getClientAwsCredsFromCommandLine(commandParam)
+	resp, err = getClientAwsCredsFromVault(commandParam)
+	if err == nil {
+		return resp, err
+	}
+	resp, err = getClientAwsCredsFromEnvironmentVariable()
 	if err == nil {
 		return resp, err
 	}
