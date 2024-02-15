@@ -7,8 +7,8 @@ import (
 )
 
 func AuthenticateCommand(cmd *cobra.Command) (bool, *model.Auth, error) {
-	cloudElementId, _ := cmd.PersistentFlags().GetString("cloudElementId")
-	cloudElementApiUrl, _ := cmd.PersistentFlags().GetString("cloudElementApiUrl")
+	cloudElementId, _ := cmd.PersistentFlags().GetString("elementId")
+	cloudElementApiUrl, _ := cmd.PersistentFlags().GetString("cmdbApiUrl")
 	vaultUrl, _ := cmd.PersistentFlags().GetString("vaultUrl")
 	vaultToken, _ := cmd.PersistentFlags().GetString("vaultToken")
 	vaultKey, _ := cmd.PersistentFlags().GetString("vaultKey")
@@ -33,8 +33,8 @@ func AuthenticateCommand(cmd *cobra.Command) (bool, *model.Auth, error) {
 }
 
 func AuthenticateSubCommand(cmd *cobra.Command) (bool, *model.Auth, error) {
-	cloudElementId, _ := cmd.Parent().PersistentFlags().GetString("cloudElementId")
-	cloudElementApiUrl, _ := cmd.Parent().PersistentFlags().GetString("cloudElementApiUrl")
+	cloudElementId, _ := cmd.Parent().PersistentFlags().GetString("elementId")
+	cloudElementApiUrl, _ := cmd.Parent().PersistentFlags().GetString("cmdbApiUrl")
 	vaultUrl, _ := cmd.Parent().PersistentFlags().GetString("vaultUrl")
 	vaultToken, _ := cmd.Parent().PersistentFlags().GetString("vaultToken")
 	vaultKey, _ := cmd.Parent().PersistentFlags().GetString("vaultKey")
