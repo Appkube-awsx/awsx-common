@@ -8,6 +8,7 @@ import (
 	"github.com/Appkube-awsx/awsx-common/vault"
 	"log"
 	"os"
+	"strconv"
 )
 
 func GetClientAwsCreds(commandParam model.CommandParam) (*model.ClientAwsSecrets, error) {
@@ -82,23 +83,40 @@ func getClientAwsCredsFromEnvironmentVariable() (*model.ClientAwsSecrets, error)
 
 func getClientAwsSecretsFromCmdb(commandParam model.CommandParam) (*model.ClientAwsSecrets, error) {
 	log.Println("getting client aws credentials from cmdb")
-	cloudElementResp, err := cmdb.GetCloudElement(commandParam)
-	if err != nil {
-		return nil, err
-	}
-	landingZoneResp, err := cmdb.GetLandingZone(commandParam, int(cloudElementResp.LandingzoneId))
-	if err != nil {
-		return nil, fmt.Errorf("cmdb api failed to get landing-zone response", err)
-	}
-	if err != nil {
-		return nil, fmt.Errorf("json unmarshal error to unmarshal cmdb landing-zone response", err)
+	var cloudElementResp *model.CloudElement
+	var landingZoneResp *model.Landingzone
+	var err error
+	if commandParam.CloudElementId != "" {
+		log.Println("cloudElementId found. Trying to get credentials with cloudElementId. cloudElementId: " + commandParam.CloudElementId)
+		cloudElementResp, err = cmdb.GetCloudElement(commandParam)
+		if err != nil {
+			return nil, err
+		}
+		landingZoneResp, err = cmdb.GetLandingZone(commandParam, int(cloudElementResp.LandingzoneId))
+		if err != nil {
+			return nil, fmt.Errorf("cmdb api failed to get landing-zone response", err)
+		}
+		clientAwsSecrets := model.ClientAwsSecrets{
+			ExternalId:          landingZoneResp.ExternalId,
+			CrossAccountRoleArn: landingZoneResp.RoleArn,
+		}
+		return &clientAwsSecrets, nil
 	}
 
-	clientAwsSecrets := model.ClientAwsSecrets{
-		ExternalId:          landingZoneResp.ExternalId,
-		CrossAccountRoleArn: landingZoneResp.RoleArn,
+	if commandParam.LandingZoneId != "" {
+		landingZoneId, err := strconv.Atoi(commandParam.LandingZoneId)
+		if err != nil {
+			return nil, fmt.Errorf("failed to convert string landingZoneId into int. landingZoneId: "+commandParam.LandingZoneId, err)
+		}
+		landingZoneResp, err = cmdb.GetLandingZone(commandParam, landingZoneId)
+		clientAwsSecrets := model.ClientAwsSecrets{
+			ExternalId:          landingZoneResp.ExternalId,
+			CrossAccountRoleArn: landingZoneResp.RoleArn,
+		}
+		return &clientAwsSecrets, nil
 	}
-	return &clientAwsSecrets, nil
+
+	return nil, fmt.Errorf("neither cloudElementId nor landingZoneId provided. cannot get credentials from cmdb")
 }
 
 func getClientAwsCredsFromCommandLine(commandParam model.CommandParam) (*model.ClientAwsSecrets, error) {

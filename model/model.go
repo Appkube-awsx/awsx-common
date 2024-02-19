@@ -79,6 +79,7 @@ type VaultResponse struct {
 }
 
 type CommandParam struct {
+	LandingZoneId       string `json:"landingZoneId,omitempty"`
 	CloudElementId      string `json:"cloudElementId,omitempty"`
 	CloudElementApiUrl  string `json:"cloudElementApiUrl,omitempty"`
 	VaultUrl            string `json:"vaultUrl,omitempty"`
@@ -93,6 +94,7 @@ type CommandParam struct {
 
 // Auth struct to store authentication data
 type Auth struct {
+	LandingZoneId       string `json:"landingZoneId,omitempty"`
 	VaultUrl            string `json:"vaultUrl,omitempty"`
 	VaultToken          string `json:"vaultToken,omitempty"`
 	VaultKey            string `json:"vaultKey,omitempty"`

@@ -7,6 +7,7 @@ import (
 )
 
 func AuthenticateCommand(cmd *cobra.Command) (bool, *model.Auth, error) {
+	landingZoneId, _ := cmd.Parent().PersistentFlags().GetString("landingZoneId")
 	cloudElementId, _ := cmd.PersistentFlags().GetString("elementId")
 	cloudElementApiUrl, _ := cmd.PersistentFlags().GetString("cmdbApiUrl")
 	vaultUrl, _ := cmd.PersistentFlags().GetString("vaultUrl")
@@ -18,6 +19,7 @@ func AuthenticateCommand(cmd *cobra.Command) (bool, *model.Auth, error) {
 	crossAccountRoleArn, _ := cmd.PersistentFlags().GetString("crossAccountRoleArn")
 	externalId, _ := cmd.PersistentFlags().GetString("externalId")
 	commandParam := model.CommandParam{
+		LandingZoneId:       landingZoneId,
 		CloudElementId:      cloudElementId,
 		CloudElementApiUrl:  cloudElementApiUrl,
 		VaultUrl:            vaultUrl,
@@ -33,6 +35,7 @@ func AuthenticateCommand(cmd *cobra.Command) (bool, *model.Auth, error) {
 }
 
 func AuthenticateSubCommand(cmd *cobra.Command) (bool, *model.Auth, error) {
+	landingZoneId, _ := cmd.Parent().PersistentFlags().GetString("landingZoneId")
 	cloudElementId, _ := cmd.Parent().PersistentFlags().GetString("elementId")
 	cloudElementApiUrl, _ := cmd.Parent().PersistentFlags().GetString("cmdbApiUrl")
 	vaultUrl, _ := cmd.Parent().PersistentFlags().GetString("vaultUrl")
@@ -44,6 +47,7 @@ func AuthenticateSubCommand(cmd *cobra.Command) (bool, *model.Auth, error) {
 	crossAccountRoleArn, _ := cmd.Parent().PersistentFlags().GetString("crossAccountRoleArn")
 	externalId, _ := cmd.Parent().PersistentFlags().GetString("externalId")
 	commandParam := model.CommandParam{
+		LandingZoneId:       landingZoneId,
 		CloudElementId:      cloudElementId,
 		CloudElementApiUrl:  cloudElementApiUrl,
 		VaultUrl:            vaultUrl,
