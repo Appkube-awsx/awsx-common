@@ -7,7 +7,7 @@ import (
 )
 
 func AuthenticateCommand(cmd *cobra.Command) (bool, *model.Auth, error) {
-	landingZoneId, _ := cmd.Parent().PersistentFlags().GetString("landingZoneId")
+	landingZoneId, _ := cmd.PersistentFlags().GetString("landingZoneId")
 	cloudElementId, _ := cmd.PersistentFlags().GetString("elementId")
 	cloudElementApiUrl, _ := cmd.PersistentFlags().GetString("cmdbApiUrl")
 	vaultUrl, _ := cmd.PersistentFlags().GetString("vaultUrl")
