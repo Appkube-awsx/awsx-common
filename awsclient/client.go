@@ -4,7 +4,6 @@ import (
 	"github.com/Appkube-awsx/awsx-common/model"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/apigateway"
-	"github.com/aws/aws-sdk-go/service/apigatewayv2"
 	"github.com/aws/aws-sdk-go/service/appmesh"
 	"github.com/aws/aws-sdk-go/service/athena"
 	"github.com/aws/aws-sdk-go/service/cloudfront"
@@ -32,27 +31,27 @@ import (
 )
 
 const (
-	LAMBDA_CLIENT               = "lambda"
-	COST_EXPLORER               = "costExplorer"
-	CLOUDWATCH_LOG              = "cloudWatchLog"
-	CLOUDWATCH                  = "cloudwatch"
-	KMS_CLIENT                  = "kms"
-	ELBV2_CLIENT                = "elbv2"
-	CONFIG_SERVICE_CLIENT       = "configservice"
-	EKS_CLIENT                  = "eks"
-	RDS_CLIENT                  = "rds"
-	CLOUD_FRONT_CLIENT          = "cloudfront"
-	WAF_CLIENT                  = "waf"
-	EC2_CLIENT                  = "ec2"
-	ECS_CLIENT                  = "ecs"
-	S3_CLIENT                   = "s3"
-	DYNAMODB_CLIENT             = "dynamodb"
-	KINESIS_CLIENT              = "kinesis"
-	IAM_CLIENT                  = "iam"
-	MEMORYDB_CLIENT             = "memorydb"
-	GLUE_CLIENT                 = "glue"
-	APIGATEWAY_CLIENT           = "apigateway"
-	APIGATEWAYV2_CLIENT         = "apigatewayv2"
+	LAMBDA_CLIENT         = "lambda"
+	COST_EXPLORER         = "costExplorer"
+	CLOUDWATCH_LOG        = "cloudWatchLog"
+	CLOUDWATCH            = "cloudwatch"
+	KMS_CLIENT            = "kms"
+	ELBV2_CLIENT          = "elbv2"
+	CONFIG_SERVICE_CLIENT = "configservice"
+	EKS_CLIENT            = "eks"
+	RDS_CLIENT            = "rds"
+	CLOUD_FRONT_CLIENT    = "cloudfront"
+	WAF_CLIENT            = "waf"
+	EC2_CLIENT            = "ec2"
+	ECS_CLIENT            = "ecs"
+	S3_CLIENT             = "s3"
+	DYNAMODB_CLIENT       = "dynamodb"
+	KINESIS_CLIENT        = "kinesis"
+	IAM_CLIENT            = "iam"
+	MEMORYDB_CLIENT       = "memorydb"
+	GLUE_CLIENT           = "glue"
+	APIGATEWAY_CLIENT     = "apigateway"
+	//APIGATEWAYV2_CLIENT         = "apigatewayv2"
 	APPMESH_CLIENT              = "appmesh"
 	GLACIER_CLIENT              = "glacier"
 	ELASTICSEARCHSERVICE_CLIENT = "elasticsearchservice"
@@ -61,27 +60,27 @@ const (
 )
 
 var clients = map[string]func(*session.Session) interface{}{
-	LAMBDA_CLIENT:               func(session *session.Session) interface{} { return lambda.New(session) },
-	COST_EXPLORER:               func(session *session.Session) interface{} { return costexplorer.New(session) },
-	CLOUDWATCH_LOG:              func(session *session.Session) interface{} { return cloudwatchlogs.New(session) },
-	CLOUDWATCH:                  func(session *session.Session) interface{} { return cloudwatch.New(session) },
-	KMS_CLIENT:                  func(session *session.Session) interface{} { return kms.New(session) },
-	ELBV2_CLIENT:                func(session *session.Session) interface{} { return elbv2.New(session) },
-	CONFIG_SERVICE_CLIENT:       func(session *session.Session) interface{} { return configservice.New(session) },
-	EKS_CLIENT:                  func(session *session.Session) interface{} { return eks.New(session) },
-	RDS_CLIENT:                  func(session *session.Session) interface{} { return rds.New(session) },
-	CLOUD_FRONT_CLIENT:          func(session *session.Session) interface{} { return cloudfront.New(session) },
-	WAF_CLIENT:                  func(session *session.Session) interface{} { return waf.New(session) },
-	EC2_CLIENT:                  func(session *session.Session) interface{} { return ec2.New(session) },
-	ECS_CLIENT:                  func(session *session.Session) interface{} { return ecs.New(session) },
-	S3_CLIENT:                   func(session *session.Session) interface{} { return s3.New(session) },
-	DYNAMODB_CLIENT:             func(session *session.Session) interface{} { return dynamodb.New(session) },
-	KINESIS_CLIENT:              func(session *session.Session) interface{} { return kinesis.New(session) },
-	IAM_CLIENT:                  func(session *session.Session) interface{} { return iam.New(session) },
-	MEMORYDB_CLIENT:             func(session *session.Session) interface{} { return memorydb.New(session) },
-	GLUE_CLIENT:                 func(session *session.Session) interface{} { return glue.New(session) },
-	APIGATEWAY_CLIENT:           func(session *session.Session) interface{} { return apigateway.New(session) },
-	APIGATEWAYV2_CLIENT:         func(session *session.Session) interface{} { return apigatewayv2.New(session) },
+	LAMBDA_CLIENT:         func(session *session.Session) interface{} { return lambda.New(session) },
+	COST_EXPLORER:         func(session *session.Session) interface{} { return costexplorer.New(session) },
+	CLOUDWATCH_LOG:        func(session *session.Session) interface{} { return cloudwatchlogs.New(session) },
+	CLOUDWATCH:            func(session *session.Session) interface{} { return cloudwatch.New(session) },
+	KMS_CLIENT:            func(session *session.Session) interface{} { return kms.New(session) },
+	ELBV2_CLIENT:          func(session *session.Session) interface{} { return elbv2.New(session) },
+	CONFIG_SERVICE_CLIENT: func(session *session.Session) interface{} { return configservice.New(session) },
+	EKS_CLIENT:            func(session *session.Session) interface{} { return eks.New(session) },
+	RDS_CLIENT:            func(session *session.Session) interface{} { return rds.New(session) },
+	CLOUD_FRONT_CLIENT:    func(session *session.Session) interface{} { return cloudfront.New(session) },
+	WAF_CLIENT:            func(session *session.Session) interface{} { return waf.New(session) },
+	EC2_CLIENT:            func(session *session.Session) interface{} { return ec2.New(session) },
+	ECS_CLIENT:            func(session *session.Session) interface{} { return ecs.New(session) },
+	S3_CLIENT:             func(session *session.Session) interface{} { return s3.New(session) },
+	DYNAMODB_CLIENT:       func(session *session.Session) interface{} { return dynamodb.New(session) },
+	KINESIS_CLIENT:        func(session *session.Session) interface{} { return kinesis.New(session) },
+	IAM_CLIENT:            func(session *session.Session) interface{} { return iam.New(session) },
+	MEMORYDB_CLIENT:       func(session *session.Session) interface{} { return memorydb.New(session) },
+	GLUE_CLIENT:           func(session *session.Session) interface{} { return glue.New(session) },
+	APIGATEWAY_CLIENT:     func(session *session.Session) interface{} { return apigateway.New(session) },
+	//APIGATEWAYV2_CLIENT:         func(session *session.Session) interface{} { return apigatewayv2.New(session) },
 	APPMESH_CLIENT:              func(session *session.Session) interface{} { return appmesh.New(session) },
 	GLACIER_CLIENT:              func(session *session.Session) interface{} { return glacier.New(session) },
 	ELASTICSEARCHSERVICE_CLIENT: func(session *session.Session) interface{} { return elasticsearchservice.New(session) },
