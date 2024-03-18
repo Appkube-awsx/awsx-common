@@ -2,7 +2,7 @@ module github.com/Appkube-awsx/awsx-common
 
 go 1.19
 
-require github.com/aws/aws-sdk-go v1.44.180
+require github.com/aws/aws-sdk-go v1.51.0
 
 require (
 	github.com/inconshreveable/mousetrap v1.0.1 // indirect

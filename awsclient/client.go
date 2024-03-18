@@ -4,6 +4,7 @@ import (
 	"github.com/Appkube-awsx/awsx-common/model"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/apigateway"
+	"github.com/aws/aws-sdk-go/service/apigatewayv2"
 	"github.com/aws/aws-sdk-go/service/appmesh"
 	"github.com/aws/aws-sdk-go/service/athena"
 	"github.com/aws/aws-sdk-go/service/cloudfront"
@@ -51,6 +52,7 @@ const (
 	MEMORYDB_CLIENT             = "memorydb"
 	GLUE_CLIENT                 = "glue"
 	APIGATEWAY_CLIENT           = "apigateway"
+	APIGATEWAYV2_CLIENT         = "apigatewayv2"
 	APPMESH_CLIENT              = "appmesh"
 	GLACIER_CLIENT              = "glacier"
 	ELASTICSEARCHSERVICE_CLIENT = "elasticsearchservice"
@@ -79,6 +81,7 @@ var clients = map[string]func(*session.Session) interface{}{
 	MEMORYDB_CLIENT:             func(session *session.Session) interface{} { return memorydb.New(session) },
 	GLUE_CLIENT:                 func(session *session.Session) interface{} { return glue.New(session) },
 	APIGATEWAY_CLIENT:           func(session *session.Session) interface{} { return apigateway.New(session) },
+	APIGATEWAYV2_CLIENT:         func(session *session.Session) interface{} { return apigatewayv2.New(session) },
 	APPMESH_CLIENT:              func(session *session.Session) interface{} { return appmesh.New(session) },
 	GLACIER_CLIENT:              func(session *session.Session) interface{} { return glacier.New(session) },
 	ELASTICSEARCHSERVICE_CLIENT: func(session *session.Session) interface{} { return elasticsearchservice.New(session) },
