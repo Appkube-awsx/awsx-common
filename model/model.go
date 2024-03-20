@@ -28,7 +28,7 @@ type CloudElement struct {
 	UpdatedBy                string                 `json:"updatedBy,omitempty"`
 	CreatedOn                string                 `json:"createdOn,omitempty"`
 	UpdatedOn                string                 `json:"updatedOn,omitempty"`
-	logGroupName             string                 `json:"logGroupName,omitempty"`
+	LogGroupName             string                 `json:"logGroupName,omitempty"`
 	LandingzoneId            int64                  `json:"landingzoneId"`
 	LandingZone              string                 `json:"landingZone,omitempty"`
 	DbCategoryId             int64                  `json:"dbCategoryId"`
