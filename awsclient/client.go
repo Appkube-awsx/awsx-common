@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/appmesh"
 	"github.com/aws/aws-sdk-go/service/athena"
 	"github.com/aws/aws-sdk-go/service/cloudfront"
+	"github.com/aws/aws-sdk-go/service/cloudtrail"
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
 	"github.com/aws/aws-sdk-go/service/cloudwatchlogs"
 	"github.com/aws/aws-sdk-go/service/configservice"
@@ -58,6 +59,7 @@ const (
 	ELASTICSEARCHSERVICE_CLIENT = "elasticsearchservice"
 	OPENSEARCHSERVICE_CLIENT    = "opensearchservice"
 	ATHENA_CLIENT               = "athena"
+	CLOUDTRAIL_CLIENT           = "cloudtrail"
 )
 
 var clients = map[string]func(*session.Session) interface{}{
@@ -87,6 +89,7 @@ var clients = map[string]func(*session.Session) interface{}{
 	ELASTICSEARCHSERVICE_CLIENT: func(session *session.Session) interface{} { return elasticsearchservice.New(session) },
 	OPENSEARCHSERVICE_CLIENT:    func(session *session.Session) interface{} { return opensearchservice.New(session) },
 	ATHENA_CLIENT:               func(session *session.Session) interface{} { return athena.New(session) },
+	CLOUDTRAIL_CLIENT:           func(session *session.Session) interface{} { return cloudtrail.New(session) },
 }
 
 // GetClient is returns aws clients
