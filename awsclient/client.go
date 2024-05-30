@@ -7,6 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/apigatewayv2"
 	"github.com/aws/aws-sdk-go/service/appmesh"
 	"github.com/aws/aws-sdk-go/service/athena"
+	"github.com/aws/aws-sdk-go/service/autoscaling"
 	"github.com/aws/aws-sdk-go/service/cloudfront"
 	"github.com/aws/aws-sdk-go/service/cloudtrail"
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
@@ -60,6 +61,7 @@ const (
 	OPENSEARCHSERVICE_CLIENT    = "opensearchservice"
 	ATHENA_CLIENT               = "athena"
 	CLOUDTRAIL_CLIENT           = "cloudtrail"
+	AUTOSCALING_CLIENT          = "autoscaling"
 )
 
 var clients = map[string]func(*session.Session) interface{}{
@@ -90,6 +92,7 @@ var clients = map[string]func(*session.Session) interface{}{
 	OPENSEARCHSERVICE_CLIENT:    func(session *session.Session) interface{} { return opensearchservice.New(session) },
 	ATHENA_CLIENT:               func(session *session.Session) interface{} { return athena.New(session) },
 	CLOUDTRAIL_CLIENT:           func(session *session.Session) interface{} { return cloudtrail.New(session) },
+	AUTOSCALING_CLIENT:          func(session *session.Session) interface{} { return autoscaling.New(session) },
 }
 
 // GetClient is returns aws clients
