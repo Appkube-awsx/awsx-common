@@ -3,6 +3,7 @@ package awsclient
 import (
 	"github.com/Appkube-awsx/awsx-common/model"
 	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/acm"
 	"github.com/aws/aws-sdk-go/service/apigateway"
 	"github.com/aws/aws-sdk-go/service/apigatewayv2"
 	"github.com/aws/aws-sdk-go/service/appmesh"
@@ -62,6 +63,7 @@ const (
 	ATHENA_CLIENT               = "athena"
 	CLOUDTRAIL_CLIENT           = "cloudtrail"
 	AUTOSCALING_CLIENT          = "autoscaling"
+	ACM_CLIENT                  = "acm"
 )
 
 var clients = map[string]func(*session.Session) interface{}{
@@ -93,6 +95,7 @@ var clients = map[string]func(*session.Session) interface{}{
 	ATHENA_CLIENT:               func(session *session.Session) interface{} { return athena.New(session) },
 	CLOUDTRAIL_CLIENT:           func(session *session.Session) interface{} { return cloudtrail.New(session) },
 	AUTOSCALING_CLIENT:          func(session *session.Session) interface{} { return autoscaling.New(session) },
+	ACM_CLIENT:                  func(session *session.Session) interface{} { return acm.New(session) },
 }
 
 // GetClient is returns aws clients
